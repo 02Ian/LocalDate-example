@@ -1,0 +1,56 @@
+info:
+    app:
+        name: '@group@.@name@'
+        description: '@description@'
+    build:
+        version: '@version@'
+        timestamp: '@timestamp@'
+        commit: '@jenkins_commit@'
+        label: '@jenkins_BUILD_NUMBER@'
+server:
+    port: ${PORT:5051}
+    use-forward-headers: true
+    forward-headers-strategy: framework
+    version: v1
+
+spring:
+  application:
+    name: store-users-svc
+  rest:
+    store-users-svc:
+      url: https://my7accesstest.7-eleven.com/identityiq/scim/v2/Users?filter=urn:ietf:params:scim:schemas:sailpoint:1.0:User:storess co "REPLACE" and (urn:ietf:params:scim:schemas:sailpoint:1.0:User:foHPJobCode eq "7" or urn:ietf:params:scim:schemas:sailpoint:1.0:User:foHPJobCode eq "11") and urn:ietf:params:scim:schemas:sailpoint:1.0:User:companyCode eq "090" and active eq "true"
+      oauth-url: https://my7accesstest.7-eleven.com/identityiq/oauth2/token
+      username: YUlyW03U0IUhWhXOyyZvpiQCWROkpTFe
+      password: vIbKPrsd8RWT4pfd
+
+# swagger ui configuration for Open AP`I
+swagger-config:
+    pathMapping: /
+    enableSwagger: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+open-api-spec:
+  host: ${APIGEE_GATEWAY_HOST}
+  base-path: /store-users
+
+---
+spring:
+  profiles: local
+  rest:
+    store-users-svc:
+      url: https://my7accesstest.7-eleven.com/identityiq/scim/v2/Users?filter=urn:ietf:params:scim:schemas:sailpoint:1.0:User:storess co "REPLACE" and (urn:ietf:params:scim:schemas:sailpoint:1.0:User:foHPJobCode eq "7" or urn:ietf:params:scim:schemas:sailpoint:1.0:User:foHPJobCode eq "11") and urn:ietf:params:scim:schemas:sailpoint:1.0:User:companyCode eq "090" and active eq "true"
+      oauth-url: https://my7accesstest.7-eleven.com/identityiq/oauth2/token
+      username: YUlyW03U0IUhWhXOyyZvpiQCWROkpTFe
+      password: vIbKPrsd8RWT4pfd
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+open-api-spec:
+  host: localhost
+  base-path:

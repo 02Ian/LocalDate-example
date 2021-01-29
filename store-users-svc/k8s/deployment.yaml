@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-users-svc-lb
+  namespace: enterprise-service-layer
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http-query
+  selector:
+    app: store-users-svc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-users-svc
+  namespace: enterprise-service-layer
+spec:
+  selector:
+    matchLabels:
+      app: store-users-svc
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: store-users-svc
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+        - name: store-users-svc
+          image: $$IMAGE_NAME
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: "/actuator/health"
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: "/actuator/health"
+              port: http
+            initialDelaySeconds: 130
+            timeoutSeconds: 10
+            failureThreshold: 10
+          env:
+            - name: PORT
+              value: "80"
+            - name: SPRING_PROFILES_ACTIVE
+              value: $$ENVIRONMENT_TYPE
+            - name: USE_FORWARD_HEADERS
+              value: "true"
+            - name: FORWARD_HEADERS_STRATEGY
+              value: "framework"
+            - name: STORE_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: store-users-secret
+                  key: store_service_url
+            - name: STORE_SERVICE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: store-users-secret
+                  key: store_service_username
+            - name: STORE_SERVICE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: store-users-secret
+                  key: store_service_password
+            - name: APIGEE_GATEWAY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: env-info
+                  key: apigee-gateway-host
+          resources:
+            requests:
+              cpu: "75m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "2Gi"
