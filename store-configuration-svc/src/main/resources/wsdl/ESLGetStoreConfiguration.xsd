@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:com="http://www.seveneleven.com/dge/esl/entities/common/V1" xmlns:hdr="http://www.seveneleven.com/dge/esl/entities/pos/header/V1" xmlns="http://www.seveneleven.com/dge/esl/messages/pos/getstoreconfig/V1" targetNamespace="http://www.seveneleven.com/dge/esl/messages/pos/getstoreconfig/V1" elementFormDefault="qualified">
+<xsd:import namespace="http://www.seveneleven.com/dge/esl/entities/common/V1" schemaLocation="ESLCommon.xsd"/>
+<xsd:import namespace="http://www.seveneleven.com/dge/esl/entities/pos/header/V1" schemaLocation="ESLHeader.xsd"/>
+<xsd:element name="GetStoreConfiguration" type="ConfigRequestType"/>
+<xsd:element name="GetStoreConfigurationResponse" type="ConfigResponseType"/>
+<xsd:complexType name="ConfigRequestType">
+<xsd:sequence>
+<xsd:element name="APIRequest" type="hdr:APIRequestType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ConfigResponseType">
+<xsd:sequence>
+<xsd:element ref="com:APIResponse"/>
+<xsd:element name="ConfigParams">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="ConfigParams" type="com:ConfigParamType" maxOccurs="unbounded" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

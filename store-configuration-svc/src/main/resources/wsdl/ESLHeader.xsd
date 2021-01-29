@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema targetNamespace="http://www.seveneleven.com/dge/esl/entities/pos/header/V1" xmlns="http://www.seveneleven.com/dge/esl/entities/pos/header/V1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xsd:element name="APIRequest" type="APIRequestType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the API Request details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="APIRequestType">
+<xsd:sequence>
+<xsd:element name="DGETransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>DGE Transaction Sequence. Assigned per POS transaction by POS and 
+			used in each DGE member transaction for the current POS transaction. An 8 digit number 
+			that represents: dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+					tt - terminal number 
+					TTTT - transaction number 
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="POSTransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Assigned per POS transaction. An 8 digit number that represents:
+						dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+						tt   - terminal number 
+						TTTT - transaction number 
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreId" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>The 7-Eleven identifier (Currently 5 digits and can be expanded 
+			up to 10 digits in future) for the Store where the transaction is taking place. 
+			No leading zeroes/characters.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Channel" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>The store will always set this to 3 for all requests.
+					        	  1 - Web
+							      2 – Mobile
+						          3-POS
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="RequestDateTime" type="xsd:dateTime">
+<xsd:annotation>
+<xsd:documentation>The date and time of the transaction. Current, local date/time 
+			at the store when the request is being sent to ESL In 12 hr format, with milliseconds
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MessageFormatVersion" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Version of the message format. Support from 1-99999</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="APIResponse" type="APIResponseType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the API Response details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="APIResponseType">
+<xsd:sequence>
+<xsd:element name="DGETransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>DGE Transaction Sequence. Assigned per POS transaction by POS and 
+			used in each DGE member transaction for the current POS transaction. An 8 digit number 
+			that represents: dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+					tt - terminal number 
+					TTTT - transaction number 
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="POSTransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Assigned per POS transaction. An 8 digit number that represents:
+						dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+						tt   - terminal number 
+						TTTT - transaction number 
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreId" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>The 7-Eleven identifier (Currently 5 digits and can be expanded 
+			up to 10 digits in future) for the Store where the transaction is taking place. 
+			No leading zeroes/characters.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="RequestDateTime" type="xsd:dateTime">
+<xsd:annotation>
+<xsd:documentation>The date and time of the transaction. Current, local date/time 
+			at the store when the request is being sent to ESL In 12 hr format, with milliseconds
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MessageFormatVersion" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Version of the message format. Support from 1-99999</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ExecutionDuration" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>Unique identifier of the Configuration Parameter</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Status" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>Unique identifier of the Configuration Parameter</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

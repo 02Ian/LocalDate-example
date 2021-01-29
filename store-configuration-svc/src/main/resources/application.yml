@@ -1,0 +1,43 @@
+server:
+  port: ${PORT:8080}
+  use-forward-headers: ${USE_FORWARD_HEADERS:true}
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:framework}
+
+info:
+  app:
+    name: @project.groupId@.@project.artifactId@
+    description: @project.description@
+  build:
+    version: @project.version@
+    timestamp: @timestamp@
+    commit: @jenkins.commit@
+    label: @jenkins.BUILD_NUMBER@
+
+spring:
+  application:
+    name: store-configuration-svc
+  datasource:
+    url: ${PG_DB_URL}
+    username: ${PG_DB_USERNAME}
+    password: ${PG_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:postgresql://devpostgres.7ep-dev.7-eleven.com:5433/mdlw
+    username: sa-usrhier-apiusr
+    password: ${password:,0UUL3Wj}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      proc:
+        param_null_passing: true
+      dialect: org.hibernate.dialect.PostgreSQLDialect

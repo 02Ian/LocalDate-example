@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gsd="http://www.seveneleven.com/dge/esl/messages/pos/getstoreconfig/V1" xmlns:gss="http://www.seveneleven.com/dge/esl/services/pos/getstoreconfig/V1" targetNamespace="http://www.seveneleven.com/dge/esl/services/pos/getstoreconfig/V1">
+<wsdl:types>
+<xsd:schema>
+<xsd:import namespace="http://www.seveneleven.com/dge/esl/messages/pos/getstoreconfig/V1" schemaLocation="ESLGetStoreConfiguration.xsd"/>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="GetStoreConfigurationRequest">
+<wsdl:part name="in" element="gsd:GetStoreConfiguration"/>
+</wsdl:message>
+<wsdl:message name="GetStoreConfigurationResponse">
+<wsdl:part name="return" element="gsd:GetStoreConfigurationResponse"/>
+</wsdl:message>
+<wsdl:portType name="ESLGetStoreConfigurationPortType">
+<wsdl:operation name="GetStoreConfiguration">
+<wsdl:input message="gss:GetStoreConfigurationRequest"/>
+<wsdl:output message="gss:GetStoreConfigurationResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>

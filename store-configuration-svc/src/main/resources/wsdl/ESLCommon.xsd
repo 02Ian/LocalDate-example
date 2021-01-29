@@ -1,0 +1,845 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema targetNamespace="http://www.seveneleven.com/dge/esl/entities/common/V1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.seveneleven.com/dge/esl/entities/common/V1" elementFormDefault="qualified">
+<xsd:element name="APIRequest" type="APIRequestType"/>
+<xsd:complexType name="APIRequestType">
+<xsd:sequence>
+<xsd:element name="DGETransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>DGE Transaction Sequence. Assigned per POS transaction by POS and 
+			used in each DGE member transaction for the current POS transaction. An 8 digit number 
+			that represents: dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+					tt - terminal number 
+					TTTT - transaction number 
+                                       </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="POSTransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Assigned per POS transaction. An 8 digit number that represents:
+						dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+						tt   - terminal number 
+						TTTT - transaction number 
+                                        </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreId" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The 7-Eleven identifier (Currently 5 digits and can be expanded 
+			up to 10 digits in future) for the Store where the transaction is taking place. 
+			No leading zeroes/characters.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Channel" type="xsd:string" minOccurs="0"/>
+<xsd:element name="RequestDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date and time of the transaction. Current, local date/time 
+			at the store when the request is being sent to ESL In 12 hr format, with milliseconds
+                                        </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MessageFormatVersion" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Version of the message format. Support from 1-99999</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LocalTemperature" type="xsd:int" minOccurs="0"/>
+<xsd:element name="LocalWeatherConditions" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="APIResponse" type="APIResponseType"/>
+<xsd:complexType name="APIResponseType">
+<xsd:sequence>
+<xsd:element name="DGETransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>DGE Transaction Sequence. Assigned per POS transaction by POS and 
+			used in each DGE member transaction for the current POS transaction. An 8 digit number 
+			that represents: dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+					tt - terminal number 
+					TTTT - transaction number 
+                			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="POSTransSequence" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Assigned per POS transaction. An 8 digit number that represents:
+						dd - device type(01-POS, 02-ICR, 03-PUMP, 05-DCAPT, 06-NW, 16-DGE)
+						tt   - terminal number 
+						TTTT - transaction number 
+                                	</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreId" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The 7-Eleven identifier (Currently 5 digits and can be expanded 
+			up to 10 digits in future) for the Store where the transaction is taking place. 
+			No leading zeroes/characters.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="RequestDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date and time of the transaction. Current, local date/time 
+			at the store when the request is being sent to ESL In 12 hr format, with milliseconds
+                                        </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MessageFormatVersion" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Version of the message format. Support from 1-99999</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ExecutionDuration" type="xsd:int" minOccurs="0"/>
+<xsd:element name="Status" type="xsd:int" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Member" type="MemberType"/>
+<xsd:complexType name="MemberType">
+<xsd:sequence>
+<xsd:element name="MemberId" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The IIN compliant identifier of the DGE/loyalty member 
+                                    that is anticipated to be assigned once the member is added</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="UserId" type="xsd:string" minOccurs="0"/>
+<xsd:element name="AlternateId" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>An alternate identifier that is used to add the customer 
+                                            to DGE/loyalty program.  This is a 10-character value, possibly a phone number. 
+                                            POS to validate for length only</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="FirstName" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s first name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LastName" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s last name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Emails" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Email" type="EmailType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Password" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s password</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="BirthDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s birthdate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Phones" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Phone" type="PhoneType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="OptInMobile" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the member’s preference as to receiving mobile 
+                                            communications from 7-Eleven. This value shall be defaulted to ‘(F)’ 
+                                            if not set explicitly before the request is sent. Never a null, 
+                                            only a T or an F.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Addresses" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Address" type="AddressType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="PromptForAtlId" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates if the member should be prompted for 
+                                            an Alternate Id. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Gender" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The members gender</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Ethnicity" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The members ethnicity:
+                                                    0/Null/Empty (Not Specified)
+                                                    01 (African American)
+                                                    02 (Asian)
+                                                    03 (Caucasian)
+                                                    04 (Hispanic)
+                                                    05 (Native American)
+                                                    06 (Pacific Islander)
+                                                    07 (Other)
+                                            </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StrategyProfile1" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Additional member profile information to be determined 
+                                            by the business and strategy teams.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StrategyProfile2" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Additional member profile information to be determined 
+                                            by the business and strategy teams.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StrategyProfile3" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Additional member profile information to be determined 
+                                            by the business and strategy teams.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="OptIns" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="OptIn" type="OptInType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="TermAndConditions" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="TermAndCondition" type="TCPPType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OptInType">
+<xsd:sequence>
+<xsd:element name="OptInName" type="xsd:string" minOccurs="0"/>
+<xsd:element name="OptInValue" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Message" type="MessageType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the message details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="MessageType">
+<xsd:sequence>
+<xsd:element name="MsgText" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The message text</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MsgType" type="xsd:int">
+<xsd:annotation>
+<xsd:documentation>Indicates the type of message</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ConfigParam" type="ConfigParamType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the Configuration Parameters</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="ConfigParamType">
+<xsd:sequence>
+<xsd:element name="ID" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Unique identifier of the Configuration Parameter</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Name" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The Name of the Configuration Parameter</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Value" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The Value of the configuration parameter</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Address" type="AddressType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the address details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="AddressType">
+<xsd:sequence>
+<xsd:element name="Category" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Address category</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="IsPrimaryAddress" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates wheater the Address is primary</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="AddressLine1" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Address Line 1</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="AddressLine2" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Address Line 2</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="AddressLine3" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Address Line 3</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="City" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s city of residence</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StateProvince" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s state/province of residence</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ZipPostalCode" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s zip code or postal code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Country" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s country of residence</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="TCPP" type="TCPPType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the TCPP details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="TCPPType">
+<xsd:sequence>
+<xsd:element name="TCPPName" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The name of the terms and conditions or PP</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TCPPValue" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation>The Boolean acceptance value</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TCPPDate" type="xsd:dateTime">
+<xsd:annotation>
+<xsd:documentation>The Date that the terms and conditions or PP became active</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TCPPAcceptDate" type="xsd:dateTime">
+<xsd:annotation>
+<xsd:documentation>The date that the member accepted the terms and conditions or PP</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Phone" type="PhoneType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the phone details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="PhoneType">
+<xsd:sequence>
+<xsd:element name="PhoneCategory" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the phone category, Mobile, Home, Work</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="IsPrimaryPhone" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>phone primary flag</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="PhoneNumber" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s phone</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Email" type="EmailType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the email details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="EmailType">
+<xsd:sequence>
+<xsd:element name="EmailCategory" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the email category</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="IsPrimaryEmail" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>email address primary flag</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="EmailAddress" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The member’s email address</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Offer" type="OfferType"/>
+<xsd:complexType name="OfferType">
+<xsd:sequence>
+<xsd:element name="UPCCode" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>UPC of the offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Amount" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Value of the offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TypeCode" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicator that suggests whether to apply 
+			to current transaction or print barcode on the receipt.
+				01-Credit Item, apply immediately.
+				02-Print barcode on the receipt.
+			</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ReadOnlyDescription" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Offer Description as determined by the 
+                                            requesting channel</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ReceiptDescription" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Offer short description as determined 
+                                            by the requesting channel</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="HasLocationData" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>“T” or “F” to indicate if there is location 
+			data associated with the offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreIDs" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="StoreID" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>
+                                 Array of Store IDs where the offer is valid. If the offer is available
+                                 at all locations, this will return NULL
+                                </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Description" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Offer Description as determined by the 
+			requesting channel</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ShortDescription" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Offer short description as determined 
+			by the requesting channel</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Disclaimer" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Offer disclaimer/fine print text to be displayed.  
+			Display can be determined by channel.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="CouponInstruction" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Another message that may be channel driven, 
+			which may display special instructions regarding the offer.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="SmallImageURL" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>URL of image</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MediumImageURL" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>URL of image</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LargeImageURL" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>URL of image</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="XLargeImageURL" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>URL of image</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="CreateDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date that the offer was created 
+			in the system</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="EffectiveDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The start date of the offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ExpirationDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date on which the offer expires</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="VisibleDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date on which the offer will be visible 
+			in the member wallet</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StartTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The time of day that the offer is valid</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="EndTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The time of the day after which the offer 
+			is not valid.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="DaysAvailable" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The days of the week on which the offer is valid.  
+			As a bitmask.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Sequence" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The order in which the offer is displayed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="IsDynamic" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates that the offer is a Store Offer 
+			not a member wallet offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="DynamicMustBeMember" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates whether the Store Offer is for all 
+			Guests or just DGE members</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="IsAvailableNow" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Flag to indicate whether the offer is available 
+			at the time the request.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxTransUseCount" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times that an offer may be used 
+			in a single transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxCustomerUseCount" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times that an offer may be used 
+			by the member</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxCustomerUseCountUsage" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times that the offer has been 
+			used by the member at the time of the call</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxOverallUseCount" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times the offer may be used in 
+			total across all members</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxOverallUseCountUsage" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times that the offer has been 
+			used in total across all members at the time of the call</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxOverallUseAmount" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The maximum dollar amount that the offer may use 
+			in total across all members</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxOverallUseAmountUsage" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The dollar amount that the offer has used in 
+			total across all members at the time of the call</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="StructuredOffer" type="StructuredOfferType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the structured offer details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="StructuredOfferType">
+<xsd:sequence>
+<xsd:element name="Code" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The structured offer code.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Name" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The name of the structured offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Description" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The description of the structured offer.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StartDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date from which the structured 
+                                offer is valid.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="EndDate" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date after which the structured offer 
+                                is no loger valid</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Issues" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of times the member has 
+                                met the goal.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MaxIssues" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The maximum number of times that the 
+                                member may reach the goal</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="HasLocationData" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Flag which indicates if the structured offer is 
+                                associated with specific locations</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreIDs" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="StoreID" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>
+         If HasLocationData is true then this array will be populated with the
+         store IDs of the locations where the structured offer is valid
+        </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="IsDynamic" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates that the offer is a Store Offer 
+                                not a member wallet offer</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Progress" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of item purchases the member has 
+                                made towards the goal</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Goal" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of item purchases the member must 
+                                make to satisfy the requirement of the structured offer and 
+                                receive the associated offer.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ESLPerformanceMetric" type="ESLPerformanceMetricType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the ESL performance metric details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="ESLPerformanceMetricType">
+<xsd:sequence>
+<xsd:element name="DGETransactionID" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Indicates the Transaction ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="POSTransactionSeq" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Transaction Sequence</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="SOAInstanceID" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the SOA ESL layer instance ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Channel" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Channel</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="RequestDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date and time of the transaction from the request message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ServiceName" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the name of the ESL service</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StoreID" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Store ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MemberID" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Member ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="OAGStartDateTime" type="xsd:long" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The start date and time of the transaction OAG.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="OAGEndDateTime" type="xsd:long" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The end date and time of the transaction from OAG.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ESLStartDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The start date and time of the transaction from ESL.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ESLEndDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The end date and time of the transaction from ESL.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ESLComputedDuration" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Duration of a requested operation execution represented in milliseconds.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ESLErrorStatus" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Error Status</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ExternalPerformanceMetrics" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="ExternalPerformanceMetric" type="ExternalPerformanceMetricType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ExternalPerformanceMetric" type="ExternalPerformanceMetricType">
+<xsd:annotation>
+<xsd:documentation>Encapsulates the External performance metric details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="ExternalPerformanceMetricType">
+<xsd:sequence>
+<xsd:element name="ExternalServiceName" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The name of the external service</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ExternalTarget" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The name of the servicing system</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StartDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The start Date time</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="EndDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The end date time</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ComputedDuration" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Duration of a requested operation execution represented in milliseconds.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ReportedDuration" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Duration of a requested operation execution represented in milliseconds.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ErrorStatus" type="xsd:int" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the Error Status</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ESLPerformanceMetricAggregate" type="ESLPerformanceMetricAggregateType"/>
+<xsd:complexType name="ESLPerformanceMetricAggregateType">
+<xsd:sequence>
+<xsd:element name="ESLPerformanceMetric" type="ESLPerformanceMetricType" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ExternalPerformanceMetricAggregate" type="ExternalPerformanceMetricAggregateType"/>
+<xsd:complexType name="ExternalPerformanceMetricAggregateType">
+<xsd:sequence>
+<xsd:element name="ExternalPerformanceMetric" type="ExternalPerformanceMetricType" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="OAGStartDateTime" type="xsd:long" nillable="true">
+<xsd:annotation>
+<xsd:documentation>The start date and time of the transaction OAG.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="CRMFault" type="CRMFaultType"/>
+<xsd:complexType name="CRMFaultType">
+<xsd:sequence>
+<xsd:element name="code" type="xsd:string"/>
+<xsd:element name="name" type="xsd:string"/>
+<xsd:element name="description" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
